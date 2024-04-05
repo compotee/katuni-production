@@ -1,0 +1,43 @@
+.authorization-page-bg {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--light-grey);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.authorization-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.authorization-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 100px;
+    padding: 32px;
+    border-radius: 16px;
+    background-color: var(--main-light);
+}
+
+.authorization-title {
+}
+
+.authorization-input {
+    padding: 16px;
+    border-radius: 16px;
+    background-color: var(--light-grey);
+}
+
+.authorization-btn {
+    padding: 12px 40px;
+    color: var(--light-grey);
+    border-radius: 10px;
+    background-color: var(--blue);
+}
