@@ -1,0 +1,38 @@
+.order-card-container {
+    padding: 40px;
+    border-radius: 16px;
+    background-color: var(--light-grey);
+}
+
+.order-card-status {
+    width: 20px;
+    height: 20px;
+    border-radius: 25px;
+    background-color: #FF0000;
+}
+
+.order-card-inf {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.order-card-btns {
+    display: flex;
+    justify-content: end;
+    gap: 20px;
+}
+
+.more-detailed-btn {
+    padding: 12px 40px;
+    border-radius: 10px;
+    color: var(--dark-grey);
+    background-color: var(--light-blue);
+}
+
+.change-status-btn {
+    padding: 12px 40px;
+    border-radius: 10px;
+    color: var(--light-blue);
+    background-color: var(--blue);
+}
