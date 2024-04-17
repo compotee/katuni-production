@@ -1,6 +1,6 @@
-import './filter-style.css'
+import './filter-by-time-style.css'
 
-function Filter() {
+function FilterByTime() {
     return (
         <div className="filter-container">
             <button>Новые</button>
@@ -11,4 +11,4 @@ function Filter() {
     )
 }
 
-export default Filter;
+export default FilterByTime;

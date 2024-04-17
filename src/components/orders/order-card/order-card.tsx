@@ -5,8 +5,8 @@ function OrderCard() {
         <div className='order-card-container'>
             <div className='order-card-inf'>
                 <div>
-                    <p>Название изделия</p>
-                    <p>Дата поступления заказа: 01.01.2024</p>
+                    <p className='order-card-inf-name'>Название изделия</p>
+                    <p className='order-card-inf-date'>Дата поступления заказа: 01.01.2024</p>
                 </div>
                 <div className='order-card-status'></div>
             </div>

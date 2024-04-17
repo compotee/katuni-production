@@ -1,24 +1,31 @@
 import { createContext, useState } from "react";
 
-interface IRouteContext {
+interface IUserContext {
     isDirector: boolean,
+    name: string
     setIsDirector: (isDirector: boolean) => void
+    setName: (name: string) => void
 }
 
-export const RouteContext = createContext<IRouteContext>({
+export const UserContext = createContext<IUserContext>({
     isDirector: false,
-    setIsDirector: () => {}
+    setIsDirector: () => {},
+    name: '',
+    setName: () => {}
 });
   
-export const RouteState = ({ children }: {children: React.ReactNode}) => {
+export const UserState = ({ children }: {children: React.ReactNode}) => {
     const [isDirector, setIsDirector] = useState(false);
+    const [name, setName] = useState('logout');
 
     return (
-        <RouteContext.Provider value={{
+        <UserContext.Provider value={{
             isDirector,
-            setIsDirector
+            setIsDirector,
+            name,
+            setName
         }}>
             {children}
-        </RouteContext.Provider>
+        </UserContext.Provider>
     );
 }

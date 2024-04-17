@@ -27,6 +27,12 @@
 }
 
 .authorization-title {
+    font-weight: 500;
+    font-size: 30px;
+}
+
+.error-notification-text {
+    display: none;
 }
 
 .authorization-input {
@@ -34,6 +40,10 @@
     border-radius: 16px;
     background-color: var(--light-grey);
 }
+
+/* .authorization-empty-input {
+    border: 1px solid red;
+} */
 
 .authorization-btn {
     padding: 12px 40px;
