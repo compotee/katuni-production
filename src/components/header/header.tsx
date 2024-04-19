@@ -1,8 +1,7 @@
 import { useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
 import { UserContext } from "../../contextes/UserContext";
 import { PageContext } from '../../contextes/PageContext';
-// import Notification from '../notification/notification'
+import Notification from '../notification/notification'
 
 import logo from './img/icon-logo.svg'
 import notification from './img/notification-icon.svg'
@@ -58,28 +57,7 @@ function Header() {
                     <img src={ logout } alt="" />
                 </button>
             </div>
-            { isActive ? 
-                <div className="notification-bg">
-                    <div className='notification-container'>
-                        <p className='notification-text'>Вы уверены, что хотите выйти из системы?</p>
-                        <div className='notification-btns'>
-                            <Link 
-                                className='notification-link'
-                                to={'/'}
-                            >
-                                Выйти
-                            </Link>
-                            <button
-                                className='notification-cancel-btn'
-                                onClick={ onCancelBtnClick }
-                            >
-                                Отмена
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            : null }
-            {/* { isActive ? <Notification/> : null } */}
+            { isActive && <Notification typeNotification='Выход' onClick={ onCancelBtnClick }/> }
         </div>
     )
 }

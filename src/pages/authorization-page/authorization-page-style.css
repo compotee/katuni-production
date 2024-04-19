@@ -16,6 +16,7 @@
 }
 
 .authorization-form {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,7 +33,11 @@
 }
 
 .error-notification-text {
+    position: absolute;
+    top: 73px;
     display: none;
+    color: red;
+    font-size: 12px;
 }
 
 .authorization-input {

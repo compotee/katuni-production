@@ -1,0 +1,7 @@
+.change-status-btn {
+    padding: 12px 40px;
+    font-weight: 500;
+    border-radius: 10px;
+    color: var(--light-grey);
+    background-color: var(--blue);
+}

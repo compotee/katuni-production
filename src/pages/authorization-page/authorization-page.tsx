@@ -1,5 +1,6 @@
 import { useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useHotkeys } from 'react-hotkeys-hook'
 
 import logoImg from './img/logo.svg';
 import { UserContext } from "../../contextes/UserContext";
@@ -36,8 +37,10 @@ function AuthorizationPage() {
                 return
             }
 
-            if (passwordRef.current.value === 'd' || passwordRef.current.value === 's') {
+            if (passwordRef.current.value === 'd') {
                 setIsDirector(true)
+            } else if (passwordRef.current.value === 's') {
+                setIsDirector(false)
             } else {
                 incorrectDataTextRef.current.style.display = "inline"
                 return
@@ -47,6 +50,8 @@ function AuthorizationPage() {
             navigate('/home')
         }
     }
+
+    useHotkeys('Enter', () => onAuthorizationBtnClick())
 
     return(
         <div className="authorization-page-bg">
