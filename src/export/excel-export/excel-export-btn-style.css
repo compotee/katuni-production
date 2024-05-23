@@ -1,0 +1,12 @@
+.excel-export-btn {
+    float: right;
+    padding: 12px 40px;
+    color: var(--dark-grey);
+    border-radius: 10px;
+    background-color: var(--light-blue);
+    margin-bottom: 128px;
+}
+
+.table {
+    display: none;
+}

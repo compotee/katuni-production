@@ -1,0 +1,76 @@
+.add-order-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,.7);
+}
+
+.add-order-container {
+    width: 70%;
+    max-width: 1000px;
+    padding: 48px;
+    border-radius: 16px;
+    background-color: var(--main-light);
+}
+
+.add-order-inf {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.input-field-container {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 16px;
+    width: 100%;
+}
+
+.add-order-inf-text {
+    white-space: nowrap
+}
+
+.add-order-inf-input {
+    width: 100%;
+    height: 30px;
+    padding: 5px;
+    border-radius: 8px;
+    background-color: var(--light-grey);
+}
+
+.input-field-container-textarea {
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 16px;
+    width: 100%;
+}
+
+.add-order-inf-textarea {
+    width: 100%;
+    height: 200px;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: var(--light-grey);
+    resize: none;
+}
+
+.add-order-btns {
+    display: flex;
+    justify-content: end;
+    gap: 16px;
+}
+
+.seve-btn {
+    padding: 12px 40px;
+    font-weight: 500;
+    border-radius: 10px;
+    color: var(--light-grey);
+    background-color: var(--blue);
+}

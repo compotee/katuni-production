@@ -46,9 +46,22 @@
     background-color: var(--light-grey);
 }
 
-/* .authorization-empty-input {
-    border: 1px solid red;
-} */
+.password-input-div {
+    position: relative;
+}
+
+.password-input {
+    -webkit-text-security: disc;
+    -moz-text-security: disc;
+    text-security: disc;
+}
+
+.password-input-img {
+    z-index: 9999;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}
 
 .authorization-btn {
     padding: 12px 40px;

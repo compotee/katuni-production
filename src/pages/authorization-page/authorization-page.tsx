@@ -1,14 +1,19 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useHotkeys } from 'react-hotkeys-hook'
 
 import logoImg from './img/logo.svg';
+import hiddenPassword from './img/hidden-password.svg'
+import openPassword from './img/open-password.svg'
 import { UserContext } from "../../contextes/UserContext";
+
+import { USERS } from "../../server/users";
 
 import "./authorization-page-style.css";
 
 function AuthorizationPage() {
-    const { setName, setIsDirector } = useContext(UserContext);
+    const { setName, setIsDirector, setUserId } = useContext(UserContext);
+    const [isShowPassword, setIsShowPassword] = useState(false);
     const loginRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const emptyFieldsTextRef = useRef<HTMLParagraphElement>(null);
@@ -37,17 +42,27 @@ function AuthorizationPage() {
                 return
             }
 
-            if (passwordRef.current.value === 'd') {
-                setIsDirector(true)
-            } else if (passwordRef.current.value === 's') {
-                setIsDirector(false)
-            } else {
-                incorrectDataTextRef.current.style.display = "inline"
-                return
-            }
+            USERS.forEach((element) => {
+                if (loginRef.current && passwordRef.current && emptyFieldsTextRef.current && incorrectDataTextRef.current)
+                    if (loginRef.current.value === element.login && passwordRef.current.value === element.possword) {
+                        setUserId(element.userId)
+                        setName(element.name)
+                        setIsDirector(element.isDirector)
+                    } else {
+                        incorrectDataTextRef.current.style.display = "inline"
+                        return
+                    }
+            })
             
-            setName(loginRef.current.value)
             navigate('/home')
+        }
+    }
+
+    function showPassword() {
+        if (isShowPassword) {
+            setIsShowPassword(false)
+        } else {
+            setIsShowPassword(true)
         }
     }
 
@@ -76,12 +91,20 @@ function AuthorizationPage() {
                         placeholder="Логин"
                         ref={ loginRef }
                     />
-                    <input 
-                        className="authorization-input" 
-                        type="text"
-                        placeholder="Пароль"
-                        ref={ passwordRef }
-                    />
+                    <div className="password-input-div">
+                        <input 
+                            className={ isShowPassword ? "authorization-input" : "authorization-input password-input" }
+                            type="text"
+                            placeholder="Пароль"
+                            ref={ passwordRef } 
+                        />
+                        <button 
+                            className="password-input-img"
+                            onClick={ showPassword }
+                        >
+                            <img src={ isShowPassword ? openPassword : hiddenPassword } alt="" />
+                        </button>
+                    </div>
                     <button 
                         className="authorization-btn"
                         onClick={ onAuthorizationBtnClick }

@@ -1,14 +1,14 @@
 import './add-order-btn-style.css'
 
-// interface AddOrderBtnProps {
-//     onClick: () => void
-// }
+interface AddOrderBtnProps {
+    onClick: () => void
+}
 
-function AddOrderBtn() {
+function AddOrderBtn({ onClick }: AddOrderBtnProps) {
     return (
         <button 
             className='add-order-btn'
-            // onClick={ onClick }
+            onClick={ onClick }
         > 
             Добавить заказ
         </button>

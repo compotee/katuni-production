@@ -32,33 +32,36 @@ function Header() {
     }
 
     return (
-        <div className="header-container">
-            <div className="header-left">
-                <img src={ logo } alt="" />
-                <button 
-                    className={ isOrderPage ? "header-btn-active" :"" }
-                    onClick={ onOrderBtnClick }
-                >
-                    Заказы
-                </button>
-                <button
-                    className={ isOrderPage ? "" : "header-btn-active" }
-                    onClick={ onMaterialsBtnClick }
-                >
-                    { isDirector ? 'Все материалы' : 'Материалы' }
-                </button>
+        <div className='header-container-bg'>
+            <div className="header-container">
+                <div className="header-left">
+                    <img src={ logo } alt="" />
+                    <button 
+                        className={ isOrderPage ? "header-btn-active" :"" }
+                        onClick={ onOrderBtnClick }
+                    >
+                        Заказы
+                    </button>
+                    <button
+                        className={ isOrderPage ? "" : "header-btn-active" }
+                        onClick={ onMaterialsBtnClick }
+                    >
+                        { isDirector ? 'Все материалы' : 'Материалы' }
+                    </button>
+                </div>
+                <div className="header-right">
+                    <p>{ name }</p>
+                    <button>
+                        <img src={ notification } alt="" />
+                    </button>
+                    <button onClick={ onLogoutBtnClick } title="Выход">
+                        <img src={ logout } alt="" />
+                    </button>
+                </div>
+                { isActive && <Notification typeNotification='Выход' onClick={ onCancelBtnClick }/> }
             </div>
-            <div className="header-right">
-                <p>{ name }</p>
-                <button>
-                    <img src={ notification } alt="" />
-                </button>
-                <button onClick={ onLogoutBtnClick }>
-                    <img src={ logout } alt="" />
-                </button>
-            </div>
-            { isActive && <Notification typeNotification='Выход' onClick={ onCancelBtnClick }/> }
         </div>
+        
     )
 }
 

@@ -11,6 +11,14 @@
     gap: 132px;
 }
 
+.orders-list__items {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+    margin-bottom: 48px;
+}
+
 @media (max-width: 1000px) {
     .orders-list {
         gap: 64px;
