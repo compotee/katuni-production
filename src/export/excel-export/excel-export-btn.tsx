@@ -2,11 +2,27 @@ import { useRef } from 'react';
 import { DownloadTableExcel } from 'react-export-table-to-excel';
 import { ORDERS } from '../../server/orders';
 
+// import exportImg from './img/export.svg'
 import './excel-export-btn-style.css'
 
 
 function ExcelExport() {
     const tableRef = useRef(null);
+
+    let newOrderCount = 0;
+    let currentOrdersCount = 0;
+    let completedOrdersCount = 0;
+
+    ORDERS.forEach((element) => {
+        if (element.status === "Новый") {
+            newOrderCount += 1;
+        } else if (element.status === "Текущий") {
+            currentOrdersCount += 1;
+        } else {
+            completedOrdersCount += 1;
+        }
+            
+    })
 
     return(
         <div>
@@ -14,7 +30,10 @@ function ExcelExport() {
                 filename="Orders"
                 currentTableRef={tableRef.current}
             >
-                <button className="excel-export-btn">Скачать таблицу всех заказов .xls</button>
+                <button className="excel-export-btn">
+                    Скачать таблицу всех заказов .xls
+                    {/* <img src={ exportImg } alt="" /> */}
+                </button>
             </DownloadTableExcel>
             <table className='table' ref={tableRef}>
                 <tbody>
@@ -42,6 +61,26 @@ function ExcelExport() {
                                 
                         )})
                     }
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>Всего заказов</th>
+                        <th>Новый</th>
+                        <th>Текущие</th>
+                        <th>Завершенные</th>
+                    </tr>
+                    <tr>
+                        <td>{ ORDERS.length }</td>
+                        <td>{ newOrderCount }</td>
+                        <td>{ currentOrdersCount }</td>
+                        <td>{ completedOrdersCount }</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

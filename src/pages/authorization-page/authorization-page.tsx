@@ -1,12 +1,10 @@
 import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useHotkeys } from 'react-hotkeys-hook'
-
 import logoImg from './img/logo.svg';
 import hiddenPassword from './img/hidden-password.svg'
 import openPassword from './img/open-password.svg'
 import { UserContext } from "../../contextes/UserContext";
-
 import { USERS } from "../../server/users";
 
 import "./authorization-page-style.css";
@@ -48,13 +46,12 @@ function AuthorizationPage() {
                         setUserId(element.userId)
                         setName(element.name)
                         setIsDirector(element.isDirector)
+                        navigate('/home')
                     } else {
                         incorrectDataTextRef.current.style.display = "inline"
                         return
                     }
             })
-            
-            navigate('/home')
         }
     }
 

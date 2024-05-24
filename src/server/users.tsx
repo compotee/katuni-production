@@ -17,7 +17,7 @@ const USERS = [
         userId: 3,
         isDirector: false,
         name: "Мария",
-        login: "masha",
+        login: "maria",
         possword: "789"
     }
 ]

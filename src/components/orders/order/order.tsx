@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { UserContext } from '../../../contextes/UserContext';
 import ChangeStatusBtn from '../change-status-btn/change-status-btn';
 import { ORDERS } from '../../../server/orders';
+import { USERS } from '../../../server/users';
 
 import './order-style.css'
 
@@ -34,7 +35,7 @@ function Order({ onCloseOrderBtnClick, onChangeStatusBtnClick, orderId }: OrderP
                     <div>
                         <p className='order-inf-name'>{ order.name }</p>
                         <div className='order-inf-text'>Дата поступления заказа: <span className='order-inf-text-bg'>{ order.createDate }</span></div>
-                        { isDirector &&  <div className='order-inf-text'>Швея: <span className='order-inf-text-bg'>{ order.dressmakerId }</span></div>}
+                        { isDirector &&  <div className='order-inf-text'>Швея: <span className='order-inf-text-bg'>{ USERS[order.dressmakerId].name }</span></div>}
                         <div className='order-inf-text'>Размер: <span className='order-inf-text-bg'>{ order.size }</span></div>
                         <div className='order-inf-text'>Рост: <span className='order-inf-text-bg'>{ order.height }</span></div>
                         <div className='order-inf-text'>Материалы: <span className='order-inf-text-bg'>{ order.materials }</span></div>

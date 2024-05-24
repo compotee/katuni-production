@@ -1,12 +1,10 @@
-import { useNavigate } from 'react-router-dom';
-
 import './notification-style.css'
 
 interface NotificationProps {
     typeNotification: string,
-    onClick: () => void,
-    order: string[] | null,
-    onSaveClick: { () : void } | null,
+    onCancelClick: () => void,
+    // order: string[] | null,
+    onSaveClick: () => void 
 }
 
 const TEXT_NOTIFICATION = {
@@ -15,9 +13,7 @@ const TEXT_NOTIFICATION = {
     ["Сохранить"]: { question: "Вы уверены, что хотите сохранить заказ?", buttonText: "Сохранить" }
 }
 
-function Notification({ typeNotification, onClick, order, onSaveClick }: NotificationProps) {
-    const navigate = useNavigate();
-
+function Notification({ typeNotification, onCancelClick, onSaveClick }: NotificationProps) {
     let notificationText;
 
     if (typeNotification === "Выход") {
@@ -28,38 +24,38 @@ function Notification({ typeNotification, onClick, order, onSaveClick }: Notific
         notificationText = TEXT_NOTIFICATION.Сохранить
     }
 
-    function onNotificationButtonClick() {
-        if (typeNotification === "Выход") {
-            navigate('/')
-        } else if (typeNotification === "Сохранить") {
-            onSaveClick();
-            onClick();
-        }
+    // function onNotificationButtonClick() {
+    //     if (typeNotification === "Выход") {
+    //         navigate('/')
+    //     } else if (typeNotification === "Сохранить") {
+    //         // onSaveClick();
+    //         onClick();
+    //     }
         
-        onClick;
-    }
+    //     onClick;
+    // }
 
     return (
         <div className="notification-bg">
             <div className='notification-container'>
                 <p className='notification-text'>{ notificationText?.question }</p>
-                <div>
+                {/* <div>
                     { order &&
                         order.map((element) => {
                             return <p>{ element }</p>
                         })
                     }
-                </div>
+                </div> */}
                 <div className='notification-btns'>
                     <button
                         className='notification-link'
-                        onClick={ onNotificationButtonClick }
+                        onClick={ onSaveClick }
                     >
                         { notificationText?.buttonText }
                     </button>
                     <button
                         className='notification-cancel-btn'
-                        onClick={ onClick }
+                        onClick={ onCancelClick }
                     >
                         Отмена
                     </button>

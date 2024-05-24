@@ -4,7 +4,7 @@ import './filter-up-down-style.css'
 
 function FilterUpDown() {
     return (
-        <button>
+        <button className='filter-btn'>
             <img src={ filter } alt="" />
         </button>
     )

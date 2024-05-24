@@ -11,10 +11,4 @@ skirtsMaterials.set("Юбка «Too.two»", "Ткань 9");
 skirtsMaterials.set("Юбка «Extra»", "Ткань 10");
 skirtsMaterials.set("Юбка «School mood», синяя", "Ткань 11");
 
-const dressmakers = [
-    "Екатерина",
-    "Елена", 
-    "Ирина"
-]
-
-export { skirtsMaterials, dressmakers } ;
+export { skirtsMaterials } ;

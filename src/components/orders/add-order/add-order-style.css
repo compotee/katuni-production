@@ -45,6 +45,10 @@
     background-color: var(--light-grey);
 }
 
+.add-order-inf-input:focus {
+   outline: 1px solid black;
+}
+
 .input-field-container-textarea {
     display: flex;
     /* justify-content: space-between; */
@@ -61,10 +65,19 @@
     resize: none;
 }
 
+.add-order-inf-textarea:focus {
+    outline: 1px solid black;
+}
+
+
 .add-order-btns {
     display: flex;
     justify-content: end;
     gap: 16px;
+}
+
+.close-btn:focus {
+    outline: 1px solid black;
 }
 
 .seve-btn {
@@ -73,4 +86,8 @@
     border-radius: 10px;
     color: var(--light-grey);
     background-color: var(--blue);
+}
+
+.seve-btn:focus {
+    outline: 1px solid black;
 }

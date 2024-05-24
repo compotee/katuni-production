@@ -1,4 +1,5 @@
-import { useState, useContext } from 'react'
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from "../../contextes/UserContext";
 import { PageContext } from '../../contextes/PageContext';
 import Notification from '../notification/notification'
@@ -14,6 +15,7 @@ function Header() {
     const { name, isDirector } = useContext(UserContext);
     const { isOrderPage, setIsOrderPage } = useContext(PageContext);
     const [isActive, setActive] = useState(false);
+    const navigate = useNavigate();
 
     function onOrderBtnClick() {
         setIsOrderPage(true);
@@ -29,6 +31,10 @@ function Header() {
 
     function onCancelBtnClick() {
         setActive(false);
+    }
+
+    function onExitBtnClick() {
+        navigate('/')
     }
 
     return (
@@ -58,7 +64,13 @@ function Header() {
                         <img src={ logout } alt="" />
                     </button>
                 </div>
-                { isActive && <Notification typeNotification='Выход' onClick={ onCancelBtnClick }/> }
+                { isActive && 
+                    <Notification 
+                        typeNotification='Выход' 
+                        onCancelClick={ onCancelBtnClick } 
+                        onSaveClick={ onExitBtnClick }
+                    /> 
+                }
             </div>
         </div>
         

@@ -1,11 +1,13 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 // import ChangeStatusBtn from '../change-status-btn/change-status-btn';
-import { skirtsMaterials, dressmakers } from '../../../utils/const'
+import { skirtsMaterials } from '../../../utils/const'
 import Notification from '../../notification/notification'
+import { ORDERS } from '../../../server/orders'
+import { USERS } from '../../../server/users'
 
 import penIcon from './img/pen-icon.svg'
 import './add-order-style.css'
-import { ORDERS } from '../../../server/orders'
+
 
 interface AddOrderProps {
     onCloseAddOrderBtnClick: () => void
@@ -13,8 +15,12 @@ interface AddOrderProps {
 
 function AddOrder({ onCloseAddOrderBtnClick }: AddOrderProps) {
     const [isEditing, setIsEditing] = useState(false);
-    const materialsInputRef = useRef<HTMLInputElement>(null);
     const skirtsSelectRef = useRef<HTMLSelectElement>(null);
+    const dressmakerSelectRef = useRef<HTMLSelectElement>(null);
+    const sizeSelectRef = useRef<HTMLSelectElement>(null);
+    const heightSelectRef = useRef<HTMLSelectElement>(null);
+    const materialsInputRef = useRef<HTMLInputElement>(null);
+    const infoTextAreaRef = useRef<HTMLTextAreaElement>(null);
     const [isActive, setActive] = useState(false);
 
     function onEditingBtnClick() {
@@ -27,7 +33,8 @@ function AddOrder({ onCloseAddOrderBtnClick }: AddOrderProps) {
     }
 
     function onSelectChange() {
-        materialsInputRef.current.value = skirtsMaterials.get(skirtsSelectRef.current?.value)
+        if (materialsInputRef.current && skirtsSelectRef.current)
+            materialsInputRef.current.value = skirtsMaterials.get(skirtsSelectRef.current.value)
     }
 
     function onCancelBtnClick() {
@@ -39,19 +46,22 @@ function AddOrder({ onCloseAddOrderBtnClick }: AddOrderProps) {
     }
 
     function onSaveNotificationBtnClick() {
-        ORDERS.push({
-            orderId: 5,
-            status: "Завершенный",
-            name: "Юбка «Шаринган»",
-            createDate: "01.01.2024",
-            dressmakerId: 2,
-            size: "",
-            height: "",
-            materials: "",
-            info: ""
-        });
+        const orderId = ORDERS.length + 1;
 
-        onCloseAddOrderBtnClick
+        if (skirtsSelectRef.current && dressmakerSelectRef.current && sizeSelectRef.current && heightSelectRef.current && materialsInputRef.current && infoTextAreaRef.current)
+            ORDERS.push({
+                orderId: orderId,
+                status: "Новый",
+                name: skirtsSelectRef.current.value,
+                createDate: "01.01.2024",
+                dressmakerId: Number(dressmakerSelectRef.current.value),
+                size: sizeSelectRef.current.value,
+                height: heightSelectRef.current.value,
+                materials: materialsInputRef.current.value,
+                info: infoTextAreaRef.current.value
+            });
+
+        onCloseAddOrderBtnClick();
     }
 
     return (
@@ -72,11 +82,11 @@ function AddOrder({ onCloseAddOrderBtnClick }: AddOrderProps) {
                     </div>
                     <div className='input-field-container'>
                         <p className='add-order-inf-text'>Швея:</p>
-                        <select className='add-order-inf-input' name="" id="">
+                        <select className='add-order-inf-input' ref={ dressmakerSelectRef } name="" id="">
                             {(() => {
                                 const items = [];
-                                for (const dressmaker of  dressmakers ) {
-                                    items.push(<option value="">{ dressmaker }</option>);
+                                for (let i = 1; i < USERS.length; i++ ) {
+                                    items.push(<option value={ i }>{ USERS[i].name }</option>);
                                 }
                                 return items;
                             })()}
@@ -84,23 +94,23 @@ function AddOrder({ onCloseAddOrderBtnClick }: AddOrderProps) {
                     </div>
                     <div className='input-field-container'>
                         <p className='add-order-inf-text'>Размер:</p>
-                        <select className='add-order-inf-input' name="" id="">
-                            <option value="">XXS</option>
-                            <option value="">XS</option>
-                            <option value="">S</option>
-                            <option value="">M</option>
-                            <option value="">L</option>
-                            <option value="">XL</option>
-                            <option value="">XXL</option>
+                        <select className='add-order-inf-input' ref={ sizeSelectRef } name="" id="">
+                            <option value="XXS">XXS</option>
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
                         </select>
                     </div>
                     <div className='input-field-container'>
                         <p className='add-order-inf-text'>Рост:</p>
-                        <select className='add-order-inf-input' name="" id="">
-                            <option value="">160-170</option>
-                            <option value="">170-180</option>
-                            <option value="">180-190</option>
-                            <option value="">190-200</option>
+                        <select className='add-order-inf-input' ref={ heightSelectRef } name="" id="">
+                            <option value="160-170">160-170</option>
+                            <option value="170-180">170-180</option>
+                            <option value="180-190">180-190</option>
+                            <option value="180-190">180-190</option>
                         </select>
                     </div>
                     <div className='input-field-container'>
@@ -119,7 +129,7 @@ function AddOrder({ onCloseAddOrderBtnClick }: AddOrderProps) {
                     </div>
                     <div className='input-field-container-textarea'>
                         <p className='add-order-inf-text'>Дополнительная информация:</p>
-                        <textarea className='add-order-inf-textarea' name="" id=""></textarea>
+                        <textarea className='add-order-inf-textarea' ref={ infoTextAreaRef } name="" id=""></textarea>
                     </div>
                 </div>
                 <div className='add-order-btns'>
@@ -136,7 +146,13 @@ function AddOrder({ onCloseAddOrderBtnClick }: AddOrderProps) {
                         Сохранить
                     </button>
                 </div>
-                { isActive && <Notification typeNotification='Сохранить' onClick={ onCancelBtnClick } onSaveClick={ onSaveNotificationBtnClick } order={ null }/> }
+                { isActive && 
+                    <Notification 
+                        typeNotification='Сохранить' 
+                        onCancelClick={ onCancelBtnClick } 
+                        onSaveClick={ onSaveNotificationBtnClick }
+                    /> 
+                }
             </div>
         </div>
         

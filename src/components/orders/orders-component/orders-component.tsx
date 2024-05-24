@@ -13,7 +13,7 @@ import { ORDERS } from "../../../server/orders";
 import './orders-component-style.css'
 
 function OrdersComponent() {
-    const { isDirector } = useContext(UserContext);
+    const { isDirector, userId } = useContext(UserContext);
     const [isOpenOrder, setIsOpenOrder] = useState(false);
     const [isChangeStatusNotification, setIsChangeStatusNotification] = useState(false);
     const [isAddOrder, setIsAddOrder] = useState(false);
@@ -44,6 +44,7 @@ function OrdersComponent() {
     function onCloseAddOrderBtnClick() {
         setIsAddOrder(false);
     }
+    
 
     return (
         <div className="orders-container">
@@ -55,7 +56,8 @@ function OrdersComponent() {
                 <FilterUpDown/>
                 <div className="orders-list__items">
                     {
-                        ORDERS.map((element) => {
+                        isDirector ? 
+                        ORDERS.slice(0).reverse().map((element) => {
                             return(
                                 <OrderCard 
                                     onOpenOrderBtnClick={ onOpenOrderBtnClick }
@@ -64,10 +66,21 @@ function OrdersComponent() {
                                 />
                             )
                         })
+                        :
+                        ORDERS.slice(0).reverse().map((element) => {
+                            if (element.dressmakerId === userId)
+                                return(
+                                    <OrderCard 
+                                        onOpenOrderBtnClick={ onOpenOrderBtnClick }
+                                        onChangeStatusBtnClick={ onOpenChangeStatusBtnClick }
+                                        data={ element }
+                                    />
+                                )
+                        })
                     }
                 </div>
             </div>
-            <ExcelExport></ExcelExport>
+            { isDirector && <ExcelExport></ExcelExport> }
             { isOpenOrder &&
                 <Order 
                     onCloseOrderBtnClick={ onCloseOrderBtnClick }
@@ -78,7 +91,8 @@ function OrdersComponent() {
             { isChangeStatusNotification && 
                 <Notification 
                     typeNotification="Изменить" 
-                    onClick={ onCloseStatusBtnClick }
+                    onCancelClick={ onCloseStatusBtnClick }
+                    onSaveClick={ onCloseStatusBtnClick }
                 /> 
             }
             { isAddOrder && 

@@ -3,6 +3,11 @@
     gap: 64px;
 }
 
+.not-work {
+    color: rgba(0, 0, 0, 0.5);
+    cursor: default;
+}
+
 .filter-btn {
     text-decoration: underline;
 }
